@@ -1,0 +1,150 @@
+\documentclass{article}
+
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb}
+\usepackage{subcaption}
+
+
+
+\title{Abgabe 1 für Computergestützte Methoden}
+\author{Gruppe 93: Leon Pascal Beckmann (4303783), \\ Marcel Ostwald (4110403), Fabian Schaffert (3977578)}
+\date{\today}
+
+\hyphenation{annähernd}
+
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\newpage
+
+\section{Der zentrale Grenzwertsatz}
+
+Der zentrale Grenzwertsatz (ZGS) ist ein fundamentales Resultat der Wahrscheinlichkeitstheorie, das die Verteilung von Summen unabhängiger, identisch verteilter (\textit{i.i.d.}) Zufallsvariablen (ZV) beschreibt. Er besagt, dass unter bestimmten Voraussetzungen die Summe einer großen Anzahl solcher ZV annähernd normalverteilt ist, unabhängig von der Verteilung der einzelnen ZV. Dies ist besonders nützlich, da die Normalverteilung gut untersucht und mathematisch handhabbar ist.
+
+\subsection{Aussage}
+
+Sei \( X_1, X_2, \dots, X_n \) eine Folge von \textit{i.i.d.} ZV mit dem Erwartungswert \( \mu = \mathbb{E}(X_i) \) und der Varianz \( \sigma^2 = \text{Var}(X_i) \), wobei \( 0 < \sigma^2 < \infty \) gelte. Dann konvergiert die standardisierte Summe \( Z_n \) dieser ZV für \( n \to \infty \) in Verteilung gegen eine Standardnormalverteilung:\footnote{Der zentrale Grenzwertsatz hat verschiedene Verallgemeinerungen. Eine davon ist der
+\textbf{Lindeberg-Feller-Zentrale-Grenzwertsatz} \cite[Seite 328]{klenke}, der schwächere Bedingungen an
+die Unabhängigkeit und die identische Verteilung der ZV stellt.}
+
+\begin{equation}
+\label{eq:1}
+Z_n = \frac{\sum_{i=1}^n X_i - n\mu}{\sigma \sqrt{n}} \xrightarrow{d} \mathcal{N}(0,1).
+\end{equation}
+
+
+\noindent Das bedeutet, dass für große \( n \) die Summe der ZV näherungsweise normalverteilt ist mit Erwartungswert \( n\mu \) und Varianz \( n\sigma^2 \):
+
+\begin{equation}
+\label{eq:2}
+\sum_{i=1}^n X_i \sim \mathcal{N}(n\mu, n\sigma^2).
+\end{equation}
+
+
+\subsection{Erklärung der Standardisierung}
+
+Um die Summe der ZV in eine Standardnormalverteilung zu transformieren, subtrahiert man den Erwartungswert \( n\mu \) und teilt durch die Standardabweichung \( \sigma\sqrt{n} \). Dies führt zu der obigen Formel \eqref{eq:1}. Die Darstellung \eqref{eq:2} ist für \( n \to \infty \) nicht wohldefiniert.
+
+\subsection{Anwendungen}
+
+Der ZGS wird in vielen Bereichen der Statistik und der Wahrscheinlichkeitstheorie angewendet. Typische Beispiele sind:
+\begin{itemize}
+    \item Schätzung von Umfrageergebnissen: Meinungsforschungsinstitute ziehen Stichproben aus der Bevölkerung, um den durchschnittlichen Zustimmungswert zu einer politischen Frage zu berechnen.
+    \item Qualitätskontrolle in der Produktion: Durch die Analyse von Produktionsprozessen können systematische Abweichungen identifiziert werden.
+    
+\end{itemize}
+
+\section{Bearbeitung zur Aufgabe 1}
+
+\subsection{Datenverarbeitung}
+
+Der Datensatz wurde in Excel geladen. Um die gewünschte Tabellenkalkulation durchzuführen, bedarf es zuerst der Unterteilung der Daten in Spalten, ohne sie ist die Berechnung der höchsten mittleren Temperatur nicht möglich, genauso  wie die Beobachtung von anderen Datenkategorien. Dies ist mit Hilfe des Textkonvertierungs-Assistenten in Excel möglich, wo wir den getrennten Datentypen ausgewählt haben und bei Trennzeichen '\textit{Komma}' ausgewählt haben. 
+
+\begin{figure}[ht] 
+    \centering
+    \includegraphics[width = \textwidth]{Schritt 2.png}
+    \caption{Trennung der Daten mit Hilfe des Textkonvertierungs-Assistenten}
+    \label{fig:1}
+    \end{figure}
+
+    
+\noindent Danach haben wir in Excel die Filter aktiviert und nach der Gruppe 93 gefiltert, sodass nur mit diesen Werten weitergearbeitet werden kann. Im Anschluss wurde der Datensatz auf Plausibilität überprüft. Alle Zeilen mit NAs wurden aus dem Datensatz entfernt. Außerdem wurden in den Spalten \textit{precipitation}, \textit{windspeed}, \textit{min\_temperature}, \textit{max\_temperature} und \textit{count} die Werte -1 entfernt, da diese falsch zu sein scheinen, da sie entweder unrealistisch oder unmöglich sind.
+
+\noindent Um nun die höchste mittlere Temperatur im Datensatz zu ermitteln, wurde die Spalte \textit{average\_temperature} nach dem maximalen Wert untersucht. Dies kann entweder mit der Funktion =max() gemacht werden oder mithilfe der Sortierfunktion. Dieser ist 82\,°F. Die Umrechnung von Fahrenheit (\( T_F \)) nach Celsius (\( T_C \)) erfolgt mit der folgenden Formel:
+\begin{equation}
+\label{eq:3}
+T_C = \left(T_F - 32\right) \times \frac{5}{9}
+\end{equation}
+
+Für \( T_F = 82.0^\circ F \) ergibt sich:
+
+\[T_C = \left(82.0 - 32\right) \times \frac{5}{9} \approx 27.8^\circ C\]
+
+
+\noindent Die Analyse der Daten der Gruppe 93 ergab demnach, dass die höchste mittlere Temperatur  etwa 27,8\,°C betrug. 
+
+\subsection{Datenhaltung}
+\subsubsection{Datenback-Schema}
+Im Folgenden haben wir auf Basis des in der Vorlesung vorgestellten Formats ein Datenbank-Schema entworfen.
+
+\begin{itemize}
+    \item Stationen (\underline{Id\#}, station)
+    \item Verleih (\underline{Id\#}, date\#, Stationen.Id\#, count)
+    \item Wetter (\underline{Id\#}, date\#, Stationen.Id\#, precipitation, windspeed, \\ min\_temperature, average\_temperature, max\_temperature)
+    
+\end{itemize}
+
+\subsubsection{Definition der Tabellen mit dem DDL-Teil von SQL}
+\textit{group}, \textit{date} und \textit{count} müssen in Anführungszeichen gesetzt werden, da es sich hierbei um reservierte Schlüsselwörter in SQL handelt.
+
+\begin{figure}[hb!]
+    \centering
+    \begin{subfigure}{0.4\textwidth}
+        \centering
+        \includegraphics[scale=0.5]{DDL Teil1.png}
+        \label{fig:2}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.46\textwidth}
+        \centering
+        \includegraphics[scale=0.45]{DDL Teil2.png}
+        \label{fig:3}
+    \end{subfigure}
+    \caption{Erzeugung der Tabellen}
+    \label{fig:Tabellen}
+\end{figure}
+
+
+
+\subsubsection{Import der Datensätze}
+Zur Vorbereitung auf den Import der Daten in SQL haben wir die Daten zuerst überprüft. Die fehlende Werte (NAs) haben wir bereits in einer vorherigen Aufgabe entfernt. Jetzt kontrollieren wir, ob alle Spalten des Datensatzes mit den Tabellenspalten übereinstimmen. Im Anschluss haben wir die benötigten IDs vergeben und die ursprüngliche CSV-Datei in einzelne CSV-Dateien aufgeteilt, welche nun die verschiedenen IDs enthalten. Wichtig ist nach der Bearbeitung mit Excel die Dateien auch wieder als CSV-Dateien abzuspeichern. Im Anschluss wurden die CSV-Dateien mithilfe der \textit{.import}-Funktion und dem \textit{.mode csv} jeweils in SQL importiert.
+
+
+\subsubsection{SQL Abfrage der höchsten mittleren Temperatur}
+Um das Ergebnis der Abfrage der höchsten mittleren Temperatur direkt in Celsius zu erhalten, haben wir die Umrechnungsformel \eqref{eq:3} direkt in die Abfrage inkludiert. Die Abfrage kommt zu dem gleichen Ergebnis (\(\approx 27.8^\circ C\)), wie unsere Berechnung in Excel.
+
+\begin{figure}[h] 
+    \centering
+    \includegraphics[width = \textwidth]{höchste temperatur.png}
+    \caption{Ergebnis der SQL Abfrage}
+    \label{fig:4}
+    \end{figure}
+
+\subsection{Repository bei GitHub}
+\url{https://github.com/FabianS1707/1.-Abgabe-COMET}
+
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+
+\end{document}
