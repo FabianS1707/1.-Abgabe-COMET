@@ -9,6 +9,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{amssymb}
 \usepackage{subcaption}
+\usepackage{adjustbox}
 
 
 
@@ -96,17 +97,27 @@ Für \( T_F = 82.0^\circ F \) ergibt sich:
 \subsubsection{Datenback-Schema}
 Im Folgenden haben wir auf Basis des in der Vorlesung vorgestellten Formats ein Datenbank-Schema entworfen.
 
+
+1. Normalform: Trennung nicht-atomarer Attribute
+\begin{figure}[ht] 
+    \centering
+    \includegraphics[width = \textwidth]{1. NF.png}
+    \caption{Daten in der 1. Normalform}
+    \label{fig:5}
+    \end{figure}
+
+2. Normalform: Auftrennung in mehrere Tabellen und Fremdschlüssel-Beziehungen mit passenden Abhängigkeiten
 \begin{itemize}
     \item Stationen (\underline{Id\#}, station)
     \item Verleih (\underline{Id\#}, date\#, Stationen.Id\#, count)
     \item Wetter (\underline{Id\#}, date\#, Stationen.Id\#, precipitation, windspeed, \\ min\_temperature, average\_temperature, max\_temperature)
-    
 \end{itemize}
+Schlüsselattribute haben ein \# nachgestellt und Primärschlüssel einer Tabelle wurden unterstrichen.
 
 \subsubsection{Definition der Tabellen mit dem DDL-Teil von SQL}
 \textit{group}, \textit{date} und \textit{count} müssen in Anführungszeichen gesetzt werden, da es sich hierbei um reservierte Schlüsselwörter in SQL handelt.
 
-\begin{figure}[hb!]
+\begin{figure}[ht!]
     \centering
     \begin{subfigure}{0.4\textwidth}
         \centering
@@ -124,7 +135,7 @@ Im Folgenden haben wir auf Basis des in der Vorlesung vorgestellten Formats ein 
 \end{figure}
 
 
-
+\newpage
 \subsubsection{Import der Datensätze}
 Zur Vorbereitung auf den Import der Daten in SQL haben wir die Daten zuerst überprüft. Die fehlende Werte (NAs) haben wir bereits in einer vorherigen Aufgabe entfernt. Jetzt kontrollieren wir, ob alle Spalten des Datensatzes mit den Tabellenspalten übereinstimmen. Im Anschluss haben wir die benötigten IDs vergeben und die ursprüngliche CSV-Datei in einzelne CSV-Dateien aufgeteilt, welche nun die verschiedenen IDs enthalten. Wichtig ist nach der Bearbeitung mit Excel die Dateien auch wieder als CSV-Dateien abzuspeichern. Im Anschluss wurden die CSV-Dateien mithilfe der \textit{.import}-Funktion und dem \textit{.mode csv} jeweils in SQL importiert.
 
@@ -134,7 +145,7 @@ Um das Ergebnis der Abfrage der höchsten mittleren Temperatur direkt in Celsius
 
 \begin{figure}[h] 
     \centering
-    \includegraphics[width = \textwidth]{höchste temperatur.png}
+    \includegraphics[scale = 0.6]{höchste temperatur.png}
     \caption{Ergebnis der SQL Abfrage}
     \label{fig:4}
     \end{figure}
